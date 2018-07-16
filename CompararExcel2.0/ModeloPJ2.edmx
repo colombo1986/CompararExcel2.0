@@ -1,0 +1,312 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DATAPJUDModel2.Store" Provider="System.Data.SQLite.EF6" ProviderManifestToken="data source=C:\DATAPJUD\DATAPJUD.db" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CARGAS">
+          <Key>
+            <PropertyRef Name="IdCarga" />
+          </Key>
+          <Property Name="IdCarga" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RUTTITULAR" Type="integer" />
+          <Property Name="DVTITULAR" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="NOMBRETITULAR" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="AP_TITULAR" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="AM_TITULAR" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="TIPOSOCIO" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="NOMBRECARGA" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="AP_CARGA" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="AM_CARGA" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="RUTCARGA" Type="integer" />
+          <Property Name="DVCARGA" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="FECHAINICIO" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="FECHATERMINO" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="FECHANACIMIENTO" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="ESTADO" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="IDTITULARFK" Type="integer" />
+        </EntityType>
+        <EntityType Name="NOTAS">
+          <Key>
+            <PropertyRef Name="IDNOTA" />
+          </Key>
+          <Property Name="IDNOTA" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RUTTITULAR" Type="integer" />
+          <Property Name="NOTA" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="IDTITULARFK" Type="integer" />
+        </EntityType>
+        <EntityType Name="TITULARES">
+          <Key>
+            <PropertyRef Name="IDTITULAR" />
+          </Key>
+          <Property Name="IDTITULAR" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RUT" Type="integer" />
+          <Property Name="DV" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="PATERNO" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="MATERNO" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="NOMBRES" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="SEXO" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="FECHANACIMIENTO" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="TIPOSOCIO" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="FECHAINGRESO" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="CALJURIDICA" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="CORTE" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="DESCRIPCION" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="TRIBUNAL" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="DESCRIPCION2" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="TIPOCUENTA" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="BANCO" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="NCUENTA" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="EMAIL" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="ESTADO" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="COMUNA" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="LOCALIDAD" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="REGION" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="CALLE" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="NUMERO" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="BLOCK" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="DEPARTAMENTO" Type="nvarchar" MaxLength="2147483647" />
+        </EntityType>
+        <Association Name="FK_CARGAS_0_0">
+          <End Role="TITULARES" Type="Self.TITULARES" Multiplicity="0..1" />
+          <End Role="CARGAS" Type="Self.CARGAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TITULARES">
+              <PropertyRef Name="IDTITULAR" />
+            </Principal>
+            <Dependent Role="CARGAS">
+              <PropertyRef Name="IDTITULARFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NOTAS_0_0">
+          <End Role="TITULARES" Type="Self.TITULARES" Multiplicity="0..1" />
+          <End Role="NOTAS" Type="Self.NOTAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TITULARES">
+              <PropertyRef Name="IDTITULAR" />
+            </Principal>
+            <Dependent Role="NOTAS">
+              <PropertyRef Name="IDTITULARFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DATAPJUDModel2StoreContainer">
+          <EntitySet Name="CARGAS" EntityType="Self.CARGAS" store:Type="Tables" />
+          <EntitySet Name="NOTAS" EntityType="Self.NOTAS" store:Type="Tables" />
+          <EntitySet Name="TITULARES" EntityType="Self.TITULARES" store:Type="Tables" />
+          <AssociationSet Name="FK_CARGAS_0_0" Association="Self.FK_CARGAS_0_0">
+            <End Role="TITULARES" EntitySet="TITULARES" />
+            <End Role="CARGAS" EntitySet="CARGAS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NOTAS_0_0" Association="Self.FK_NOTAS_0_0">
+            <End Role="TITULARES" EntitySet="TITULARES" />
+            <End Role="NOTAS" EntitySet="NOTAS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DATAPJUDModel2" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CARGAS">
+          <Key>
+            <PropertyRef Name="IdCarga" />
+          </Key>
+          <Property Name="IdCarga" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RUTTITULAR" Type="Int64" />
+          <Property Name="DVTITULAR" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="NOMBRETITULAR" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="AP_TITULAR" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="AM_TITULAR" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="TIPOSOCIO" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="NOMBRECARGA" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="AP_CARGA" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="AM_CARGA" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="RUTCARGA" Type="Int64" />
+          <Property Name="DVCARGA" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="FECHAINICIO" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="FECHATERMINO" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="FECHANACIMIENTO" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="ESTADO" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="IDTITULARFK" Type="Int64" />
+          <NavigationProperty Name="TITULARES" Relationship="Self.FK_CARGAS_0_0" FromRole="CARGAS" ToRole="TITULARES" />
+        </EntityType>
+        <EntityType Name="NOTAS">
+          <Key>
+            <PropertyRef Name="IDNOTA" />
+          </Key>
+          <Property Name="IDNOTA" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RUTTITULAR" Type="Int64" />
+          <Property Name="NOTA" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="IDTITULARFK" Type="Int64" />
+          <NavigationProperty Name="TITULARES" Relationship="Self.FK_NOTAS_0_0" FromRole="NOTAS" ToRole="TITULARES" />
+        </EntityType>
+        <EntityType Name="TITULARES">
+          <Key>
+            <PropertyRef Name="IDTITULAR" />
+          </Key>
+          <Property Name="IDTITULAR" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RUT" Type="Int64" />
+          <Property Name="DV" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="PATERNO" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="MATERNO" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="NOMBRES" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="SEXO" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="FECHANACIMIENTO" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="TIPOSOCIO" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="FECHAINGRESO" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="CALJURIDICA" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="CORTE" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="TRIBUNAL" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="DESCRIPCION2" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="TIPOCUENTA" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="BANCO" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="NCUENTA" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="EMAIL" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="ESTADO" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="COMUNA" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="LOCALIDAD" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="REGION" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="CALLE" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="NUMERO" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="BLOCK" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="DEPARTAMENTO" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CARGAS" Relationship="Self.FK_CARGAS_0_0" FromRole="TITULARES" ToRole="CARGAS" />
+          <NavigationProperty Name="NOTAS" Relationship="Self.FK_NOTAS_0_0" FromRole="TITULARES" ToRole="NOTAS" />
+        </EntityType>
+        <Association Name="FK_CARGAS_0_0">
+          <End Role="TITULARES" Type="Self.TITULARES" Multiplicity="0..1" />
+          <End Role="CARGAS" Type="Self.CARGAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TITULARES">
+              <PropertyRef Name="IDTITULAR" />
+            </Principal>
+            <Dependent Role="CARGAS">
+              <PropertyRef Name="IDTITULARFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NOTAS_0_0">
+          <End Role="TITULARES" Type="Self.TITULARES" Multiplicity="0..1" />
+          <End Role="NOTAS" Type="Self.NOTAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TITULARES">
+              <PropertyRef Name="IDTITULAR" />
+            </Principal>
+            <Dependent Role="NOTAS">
+              <PropertyRef Name="IDTITULARFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DATAPJUDEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CARGAS" EntityType="Self.CARGAS" />
+          <EntitySet Name="NOTAS" EntityType="Self.NOTAS" />
+          <EntitySet Name="TITULARES" EntityType="Self.TITULARES" />
+          <AssociationSet Name="FK_CARGAS_0_0" Association="Self.FK_CARGAS_0_0">
+            <End Role="TITULARES" EntitySet="TITULARES" />
+            <End Role="CARGAS" EntitySet="CARGAS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NOTAS_0_0" Association="Self.FK_NOTAS_0_0">
+            <End Role="TITULARES" EntitySet="TITULARES" />
+            <End Role="NOTAS" EntitySet="NOTAS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DATAPJUDModel2StoreContainer" CdmEntityContainer="DATAPJUDEntities2">
+          <EntitySetMapping Name="CARGAS">
+            <EntityTypeMapping TypeName="DATAPJUDModel2.CARGAS">
+              <MappingFragment StoreEntitySet="CARGAS">
+                <ScalarProperty Name="IdCarga" ColumnName="IdCarga" />
+                <ScalarProperty Name="RUTTITULAR" ColumnName="RUTTITULAR" />
+                <ScalarProperty Name="DVTITULAR" ColumnName="DVTITULAR" />
+                <ScalarProperty Name="NOMBRETITULAR" ColumnName="NOMBRETITULAR" />
+                <ScalarProperty Name="AP_TITULAR" ColumnName="AP_TITULAR" />
+                <ScalarProperty Name="AM_TITULAR" ColumnName="AM_TITULAR" />
+                <ScalarProperty Name="TIPOSOCIO" ColumnName="TIPOSOCIO" />
+                <ScalarProperty Name="NOMBRECARGA" ColumnName="NOMBRECARGA" />
+                <ScalarProperty Name="AP_CARGA" ColumnName="AP_CARGA" />
+                <ScalarProperty Name="AM_CARGA" ColumnName="AM_CARGA" />
+                <ScalarProperty Name="RUTCARGA" ColumnName="RUTCARGA" />
+                <ScalarProperty Name="DVCARGA" ColumnName="DVCARGA" />
+                <ScalarProperty Name="FECHAINICIO" ColumnName="FECHAINICIO" />
+                <ScalarProperty Name="FECHATERMINO" ColumnName="FECHATERMINO" />
+                <ScalarProperty Name="FECHANACIMIENTO" ColumnName="FECHANACIMIENTO" />
+                <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+                <ScalarProperty Name="IDTITULARFK" ColumnName="IDTITULARFK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NOTAS">
+            <EntityTypeMapping TypeName="DATAPJUDModel2.NOTAS">
+              <MappingFragment StoreEntitySet="NOTAS">
+                <ScalarProperty Name="IDNOTA" ColumnName="IDNOTA" />
+                <ScalarProperty Name="RUTTITULAR" ColumnName="RUTTITULAR" />
+                <ScalarProperty Name="NOTA" ColumnName="NOTA" />
+                <ScalarProperty Name="IDTITULARFK" ColumnName="IDTITULARFK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TITULARES">
+            <EntityTypeMapping TypeName="DATAPJUDModel2.TITULARES">
+              <MappingFragment StoreEntitySet="TITULARES">
+                <ScalarProperty Name="IDTITULAR" ColumnName="IDTITULAR" />
+                <ScalarProperty Name="RUT" ColumnName="RUT" />
+                <ScalarProperty Name="DV" ColumnName="DV" />
+                <ScalarProperty Name="PATERNO" ColumnName="PATERNO" />
+                <ScalarProperty Name="MATERNO" ColumnName="MATERNO" />
+                <ScalarProperty Name="NOMBRES" ColumnName="NOMBRES" />
+                <ScalarProperty Name="SEXO" ColumnName="SEXO" />
+                <ScalarProperty Name="FECHANACIMIENTO" ColumnName="FECHANACIMIENTO" />
+                <ScalarProperty Name="TIPOSOCIO" ColumnName="TIPOSOCIO" />
+                <ScalarProperty Name="FECHAINGRESO" ColumnName="FECHAINGRESO" />
+                <ScalarProperty Name="CALJURIDICA" ColumnName="CALJURIDICA" />
+                <ScalarProperty Name="CORTE" ColumnName="CORTE" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="TRIBUNAL" ColumnName="TRIBUNAL" />
+                <ScalarProperty Name="DESCRIPCION2" ColumnName="DESCRIPCION2" />
+                <ScalarProperty Name="TIPOCUENTA" ColumnName="TIPOCUENTA" />
+                <ScalarProperty Name="BANCO" ColumnName="BANCO" />
+                <ScalarProperty Name="NCUENTA" ColumnName="NCUENTA" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+                <ScalarProperty Name="COMUNA" ColumnName="COMUNA" />
+                <ScalarProperty Name="LOCALIDAD" ColumnName="LOCALIDAD" />
+                <ScalarProperty Name="REGION" ColumnName="REGION" />
+                <ScalarProperty Name="CALLE" ColumnName="CALLE" />
+                <ScalarProperty Name="NUMERO" ColumnName="NUMERO" />
+                <ScalarProperty Name="BLOCK" ColumnName="BLOCK" />
+                <ScalarProperty Name="DEPARTAMENTO" ColumnName="DEPARTAMENTO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
